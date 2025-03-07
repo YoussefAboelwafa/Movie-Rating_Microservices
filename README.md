@@ -3,9 +3,10 @@ In this project, multiple microservices communicate with each other to provide t
 
 ## Technologies
 
-- Spring Boot
-- Spring Cloud Eureka (Service Discovery)
-- Spring Cloud Hystrix (Dashboard, Circuit Breaker pattern, Bulkhead pattern)
+- __Spring Boot__
+- Ratings Service Storage using __MySQL__
+- Cache the MovieDB query results in __MongoDB__
+- Trending Movies Service with __gRPC__ API
 
 ## Summary
 
@@ -24,4 +25,3 @@ You can run each project either using your IDE or *mvn spring-boot:run* starting
 * Movie Catalog - http://localhost:8081/catalog/{userId}
 * Movie Info - http://localhost:8082/movies/{movieId}
 * Ratings Data - http://localhost:8083/ratings/{userId}
-* Hystrix Dashboard - Go to http://localhost:8081/hystrix. Then enter *https://localhost:8081/actuator/hystrix.stream* to the inputbox.
