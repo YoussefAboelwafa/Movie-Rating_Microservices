@@ -1,31 +1,27 @@
 package com.example.ratingsservice.models;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "ratings")
 public class Rating {
 
-    private String movieId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "rating_id", nullable = false, unique = true, updatable = false)
+    private Long ratingId;
+    @ManyToOne
+    @JoinColumn(name = "movie_id", nullable = false)
+    private Movie movieId;
+    @Column(name = "rating", nullable = false)
     private int rating;
-
-    public Rating() {
-    }
-
-    public Rating(String movieId, int rating) {
-        this.movieId = movieId;
-        this.rating = rating;
-    }
-
-    public String getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(String movieId) {
-        this.movieId = movieId;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserRating user;
 }
