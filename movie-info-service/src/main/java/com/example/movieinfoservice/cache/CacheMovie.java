@@ -12,6 +12,9 @@ public class CacheMovie {
     private String name;
     private String description;
 
+    public CacheMovie() {
+    }
+
     public CacheMovie(Movie movie) {
         this.movieId = movie.getMovieId();
         this.name = movie.getName();
