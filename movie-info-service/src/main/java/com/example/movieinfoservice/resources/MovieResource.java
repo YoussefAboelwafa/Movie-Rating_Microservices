@@ -1,16 +1,19 @@
 package com.example.movieinfoservice.resources;
 
+
+
+
+
+
+
 import com.example.movieinfoservice.models.Movie;
 import com.example.movieinfoservice.models.MovieDTO;
 import com.example.movieinfoservice.models.MovieSummary;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -37,6 +40,9 @@ public class MovieResource {
         MovieSummary movieSummary = restTemplate.getForObject(url, MovieSummary.class);
         return new Movie(movieId, movieSummary.getTitle(), movieSummary.getOverview());
     }
+
+
+
     @RequestMapping("/trendy")
     public List<MovieDTO> getTrendingMovies() {
         final String url = "https://api.themoviedb.org/3/trending/movie/day?api_key=" + apiKey;
