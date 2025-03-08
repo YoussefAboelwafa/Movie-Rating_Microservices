@@ -27,12 +27,6 @@ public class MovieResource {
     @Value("${api.key}")
     private String apiKey;
 
-    private RestTemplate restTemplate;
-    private final Random random = new Random();
-    public MovieResource(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-
     @RequestMapping("/{movieId}")
     public Movie getMovieInfo(@PathVariable("movieId") String movieId) {
         // Get the movie info from TMDB
@@ -43,6 +37,45 @@ public class MovieResource {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private RestTemplate restTemplate;
+    private final Random random = new Random();
+    public MovieResource(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
     @RequestMapping("/trendy")
     public List<MovieDTO> getTrendingMovies() {
         final String url = "https://api.themoviedb.org/3/trending/movie/day?api_key=" + apiKey;
