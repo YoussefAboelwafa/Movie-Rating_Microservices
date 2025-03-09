@@ -1,20 +1,17 @@
 package com.moviecatalogservice.resources;
 
-import com.moviecatalogservice.models.CatalogItem;
-import com.moviecatalogservice.models.Movie;
+import com.example.trendingmovies.grpc.Movie;
+import com.moviecatalogservice.models.MovieDTO;
 import com.moviecatalogservice.models.Rating;
-import com.moviecatalogservice.models.UserRating;
 import com.moviecatalogservice.services.MovieInfoService;
+import com.moviecatalogservice.services.TrendingMoviesClient;
 import com.moviecatalogservice.services.UserRatingService;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,13 +24,16 @@ public class MovieCatalogResource {
 
     private final UserRatingService userRatingService;
 
+    private final TrendingMoviesClient trendingMoviesClient;
     public MovieCatalogResource(RestTemplate restTemplate,
                                 MovieInfoService movieInfoService,
-                                UserRatingService userRatingService) {
+                                UserRatingService userRatingService,
+                                TrendingMoviesClient trendingMoviesClient) {
 
         this.restTemplate = restTemplate;
         this.movieInfoService = movieInfoService;
         this.userRatingService = userRatingService;
+        this.trendingMoviesClient = trendingMoviesClient;
     }
 
     /**
@@ -44,8 +44,15 @@ public class MovieCatalogResource {
      * @return CatalogItem that contains name, description and rating
      */
     @RequestMapping("/{userId}")
-    public List<CatalogItem> getCatalog(@PathVariable String userId) {
+    public List<Rating> getCatalog(@PathVariable String userId) {
         List<Rating> ratings = userRatingService.getUserRating(userId).getRatings();
-        return ratings.stream().map(movieInfoService::getCatalogItem).collect(Collectors.toList());
+        return ratings;
+    }
+    @RequestMapping("/topTen")
+    public List<MovieDTO> getTopTen() {
+        return trendingMoviesClient.getTrendingMovies(10)
+                .stream()
+                .map(movie -> new MovieDTO(movie.getId(), movie.getTitle(), movie.getRating()))
+                .collect(Collectors.toList());
     }
 }
