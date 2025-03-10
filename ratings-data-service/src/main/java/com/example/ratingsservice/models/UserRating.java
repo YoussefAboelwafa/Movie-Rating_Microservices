@@ -16,8 +16,7 @@ public class UserRating {
     @Id
     @Column(name = "user_id", nullable = false, unique = true, updatable = false)
     private String userId;
-    @Column(name = "username", nullable = false)
-    private String username;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Rating> ratings;
 }

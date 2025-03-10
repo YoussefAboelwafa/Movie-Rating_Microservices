@@ -14,13 +14,13 @@ public class RatingService {
     @Autowired
     private RatingsRepository ratingsRepository;
 
-    public ResponseEntity<?> getRatingsByUserId(String userId) {
-        List<Object[]> ratings = ratingsRepository.findRatingsAndMovieIdsByUserId(userId);
-        return new ResponseEntity<>(ratings, HttpStatus.OK);
-    }
+//    public ResponseEntity<?> getRatingsByUserId(String userId) {
+//        List<Object[]> ratings = ratingsRepository.findRatingsByUserId(userId);
+//        return new ResponseEntity<>(ratings, HttpStatus.OK);
+//    }
 
-    public ResponseEntity<?> getRatingsByMovieId(String movieId) {
-        List<Object[]> ratings = ratingsRepository.findRatingsAndUserIdsByMovieId(movieId);
-        return new ResponseEntity<>(ratings, HttpStatus.OK);
-    }
+//    public ResponseEntity<?> getRatingsByMovieId(String movieId) {
+//        List<Object[]> ratings = ratingsRepository.findRatingsAndUserIdsByMovieId(movieId);
+//        return new ResponseEntity<>(ratings, HttpStatus.OK);
+//    }
 }
