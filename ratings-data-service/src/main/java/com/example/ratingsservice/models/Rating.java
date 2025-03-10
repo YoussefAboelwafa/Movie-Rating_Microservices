@@ -16,9 +16,8 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rating_id", nullable = false, unique = true, updatable = false)
     private Long ratingId;
-    @ManyToOne
-    @JoinColumn(name = "movie_id", nullable = false)
-    private Movie movieId;
+    @Column(name = "movie_id", nullable = false)
+    private String movieId;
     @Column(name = "rating", nullable = false)
     private int rating;
     @ManyToOne
